@@ -12,7 +12,7 @@ streamlit库，详见requirement.txt
 ```
 
 --file  -f  接文章的路径    (compulsory)
---title -t  接选用的文章标题    (optional)
+--title -t  接选用的文章标题    (optional,random chosen if not put in)
 
 ```
 
