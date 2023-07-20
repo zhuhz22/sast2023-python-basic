@@ -1,8 +1,8 @@
-# sast2023 word game
+# sast2023 word-filling game
 
 ## 环境配置
 
-目前没有第三方依赖项
+streamlit库，详见requirement.txt
 
 ## 使用设置
 
@@ -10,15 +10,25 @@
 
 ```
 
---file  -f  接文章的路径
---sequence -s 接选用的文章序号
+--file  -f  接文章的路径    (compulsory)
+--title -t  接选用的文章标题    (optional)
 
 ```
 
-文章使用 JSON 存储，的格式如下：
+文章使用 JSON 存储
 
-...
 
 ## 游戏功能
 
-。。。
+### 命令行版本
+用户在命令行直接输入 <p><b>
+```python cmdin.py -f <文件路径> (-t <文章标题>)```
+</b></p>
+即可，随后按照命令行提示输入相关内容
+
+### GUI版本
+用户在命令行输入 <p><b>
+```streamlit run GUI.py```
+</b></p>
+尔后在弹出的图形化界面中选取题库文件，并根据提示输入选择的文章标题，按提示填词。
+<p>当且仅当所有词均填写完毕时，界面会显示填好的文章</p>

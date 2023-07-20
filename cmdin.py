@@ -1,6 +1,6 @@
 import argparse
 import json
-
+import random
 
 def parser_data():
     parser = argparse.ArgumentParser(
@@ -10,8 +10,8 @@ def parser_data():
     )
 
     parser.add_argument("-f", "--file", help="题库文件", required=True)
-    parser.add_argument("-s","--sequence",help="文章序号",required=True)
-    #TODO
+    parser.add_argument("-t","--title",help="title",required=False)
+    
     args = parser.parse_args()
     return args
 
@@ -45,11 +45,19 @@ if __name__ == "__main__":
     data = read_articles(args.file)
     articles = data["articles"]    #articles is a list
 
-    # 根据参数或随机从 articles 中选择一篇文章    #elements of list article is dictionaries
-    title=articles[int(args.sequence)]['title']
-    article=articles[int(args.sequence)]['article']
-    hints=articles[int(args.sequence)]['hints']
-    
+    # 根据参数或随机从 articles 中选择一篇文章    
+    if args.title is not None:##！！！！注意写法，不能len()!=0,因为还是none而非str
+        for _ in articles:
+            if _['title']==args.title:
+                title=_['title']
+                article=_['article']
+                hints=_['hints']
+    else:
+        index=random.randrange(len(articles))
+        title=articles[index]['title']
+        article=articles[index]['article']
+        hints=articles[index]['hints']
+        
     # 给出合适的输出，提示用户输入
     keys=get_inputs(hints)
     

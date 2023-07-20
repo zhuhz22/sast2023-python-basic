@@ -1,4 +1,4 @@
-import argparse
+
 import json
 import streamlit as st
 
@@ -34,8 +34,8 @@ if __name__ == "__main__":
         hints=articles[index[option]]['hints']
         
         st.write("bacis information of the article:\n")
-        st.write("title:\t ",title)
-        st.write("article:\t ",article)
+        st.write("title:    ",title)
+        st.write("article:    ",article)
         
         keys = []
         _=0
@@ -45,7 +45,7 @@ if __name__ == "__main__":
             keys.append(st.text_input(f"请输入{hint}:",key=str(_)))
         if len(keys[-1])>0:
             flag=True
-            
+         
         if flag==True:    
             result=replace(article, keys)
             st.write("The result is:\n",result)
