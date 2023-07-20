@@ -33,7 +33,7 @@ if __name__ == "__main__":
         article=articles[index[option]]['article']
         hints=articles[index[option]]['hints']
         
-        st.write("bacis information of the article:\n")
+        st.write("basic information of the article:\n")
         st.write("title:    ",title)
         st.write("article:    ",article)
         
