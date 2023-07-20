@@ -1,5 +1,6 @@
 # sast2023 word-filling game
 
+实现了基础此功能和基于streamlit的GUI界面
 ## 环境配置
 
 streamlit库，详见requirement.txt
