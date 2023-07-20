@@ -6,7 +6,7 @@ def parser_data():
     从命令行读取用户参数
     做出如下约定：
     1. -f 为必选参数，表示输入题库文件
-    ...
+    2. -s 为必选参数，表示选用题库中文章序号（从零开始）
 
     :return: 参数
     """
@@ -17,8 +17,8 @@ def parser_data():
     )
 
     parser.add_argument("-f", "--file", help="题库文件", required=True)
-    # TODO: 添加更多参数
-    
+    parser.add_argument("-s","--sequence",help="文章序号",required=True)
+    #TODO
     args = parser.parse_args()
     return args
 
@@ -33,8 +33,7 @@ def read_articles(filename):
     :return: 一个字典，题库内容
     """
     with open(filename, 'r', encoding="utf-8") as f:
-        # TODO: 用 json 解析文件 f 里面的内容，存储到 data 中
-    
+        data=json.load(f)
     return data
 
 
@@ -50,8 +49,8 @@ def get_inputs(hints):
 
     keys = []
     for hint in hints:
-        print(f"请输入{hint}：")
-        # TODO: 读取一个用户输入并且存储到 keys 当中
+        print(f"请输入{hint}:")
+        keys.append(input())
 
     return keys
 
@@ -67,21 +66,30 @@ def replace(article, keys):
 
     """
     for i in range(len(keys)):
-        # TODO: 将 article 中的 {{i}} 替换为 keys[i]
-        # hint: 你可以用 str.replace() 函数，也可以尝试学习 re 库，用正则表达式替换
-
+        tmp=str(i+1)
+        new_article=article.replace("{{"+tmp+"}}",keys[i])
+        article=new_article
+        # 将 article 中的 {{i}} 替换为 keys[i]
     return article
 
 
 if __name__ == "__main__":
     args = parser_data()
     data = read_articles(args.file)
-    articles = data["articles"]
+    articles = data["articles"]#articles is a list
 
-    # TODO: 根据参数或随机从 articles 中选择一篇文章
-    # TODO: 给出合适的输出，提示用户输入
-    # TODO: 获取用户输入并进行替换
-    # TODO: 给出结果
+    # 根据参数或随机从 articles 中选择一篇文章    elements of list article is dictionaries
+    title=articles[int(args.sequence)]['title']
+    article=articles[int(args.sequence)]['article']
+    hints=articles[int(args.sequence)]['hints']
+    
+    # 给出合适的输出，提示用户输入
+    keys=get_inputs(hints)
+    
+    # 获取用户输入并进行替换
+    result=replace(article, keys)
+    # 给出结果
+    print("The result is:\n",result)
 
 
 
